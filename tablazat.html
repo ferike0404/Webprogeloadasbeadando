@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>Táblázat</title>
+    <script defer src="scripttabla.js"></script>
 </head>
 <body>
     <header>
@@ -12,27 +13,45 @@
     </header>
     <nav>
         <ul>
-            <li><a href="index.html">Bevezető</a></li>
-            <li><a href="tablazat.html" class="active">Kezdőlap</a></li>
-            <li><a href="html5.html">Contact</a></li>
-            <li><a href="chartjs.html">Contact</a></li>
-            <li><a href="ajax.html">Contact</a></li>
-            <li><a href="oojs.html">Contact</a></li>
+            <li><a href="index.html">Kezdőlap</a></li>
+            <li><a href="tablazat.html" class="active">Táblázat</a></li>
+            <li><a href="html5.html">HTML5</a></li>
+            <li><a href="chartjs.html">Chartjs</a></li>
+            <li><a href="ajax.html">Ajax</a></li>
+            <li><a href="oojs.html">Oojs</a></li>
         </ul>
     </nav>
     <aside>
-        <h1>Bevezető</h1>
+        <h1>Táblázat feladat</h1>
     </aside>
     <section>
-        <h1>Bevezető oldal</h1>
-        <article>
-            <h2>Aenean nummy odio orci</h2>
-            <p>Phasellus wisi nulla...</p>
-        </article>
-        <article>
-            <h2>Aenean nummy odio orci</h2>
-            <p>Adipiscing elit praesent...</p>
-        </article>
+        <h2>CRUD Táblázat</h2>
+        
+        <form id="data-form">
+            <input type="text" id="name" placeholder="Név" required minlength="3" maxlength="50">
+            <input type="number" id="age" placeholder="Életkor" required min="1" max="120">
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="text" id="city" placeholder="Város" required minlength="2" maxlength="50">
+            <button type="submit">Hozzáadás</button>
+        </form>
+        
+        <input type="text" id="search" placeholder="Keresés...">
+        
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th onclick="sortTable(0)">Név</th>
+                        <th onclick="sortTable(1)">Életkor</th>
+                        <th onclick="sortTable(2)">Email</th>
+                        <th onclick="sortTable(3)">Város</th>
+                        <th>Műveletek</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                </tbody>
+            </table>
+        </div>
     </section>
     <footer>Készítő: Kelemen Ferenc Tamás <br>Neptun kód: OUVN70</footer>
 </body>
