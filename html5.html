@@ -12,27 +12,131 @@
     </header>
     <nav>
         <ul>
-            <li><a href="index.html">Bevezető</a></li>
-            <li><a href="tablazat.html">Kezdőlap</a></li>
-            <li><a href="html5.html" class="active">Contact</a></li>
-            <li><a href="chartjs.html">Contact</a></li>
-            <li><a href="ajax.html">Contact</a></li>
-            <li><a href="oojs.html">Contact</a></li>
+            <li><a href="index.html">Kezdőlap</a></li>
+            <li><a href="tablazat.html">Táblázat</a></li>
+            <li><a href="html5.html" class="active">HTML5</a></li>
+            <li><a href="chartjs.html">Chartjs</a></li>
+            <li><a href="ajax.html">Ajax</a></li>
+            <li><a href="oojs.html">Oojs</a></li>
         </ul>
     </nav>
     <aside>
-        <h1>Bevezető</h1>
+        <h1>HTML5 példái</h1>
     </aside>
     <section>
-        <h1>Bevezető oldal</h1>
-        <article>
-            <h2>Aenean nummy odio orci</h2>
-            <p>Phasellus wisi nulla...</p>
-        </article>
-        <article>
-            <h2>Aenean nummy odio orci</h2>
-            <p>Adipiscing elit praesent...</p>
-        </article>
+        <div>
+        <h2>Web Storage példa</h2>
+  <input type="text" id="input" placeholder="Írj be valamit">
+  <button onclick="ment()">Mentés</button>
+  <button onclick="betolt()">Betöltés</button>
+  <p id="kimenet"></p>
+
+  <script>
+    function ment() {
+      const szoveg = document.getElementById("input").value;
+      localStorage.setItem("adat", szoveg);
+    }
+
+    function betolt() {
+      const ertek = localStorage.getItem("adat");
+      document.getElementById("kimenet").innerText = "Mentett érték: " + ertek;
+    }
+  </script>
+
+  <h2>Web Worker példa</h2>
+  <button onclick="indit()">Háttérszámítás</button>
+  <p id="eredmeny">Eredmény: -</p>
+
+  <script>
+    function indit() {
+      const workerCode = `
+        self.onmessage = function() {
+          let osszeg = 0;
+          for (let i = 0; i < 1e7; i++) osszeg += i;
+          self.postMessage(osszeg);
+        };
+      `;
+      const blob = new Blob([workerCode], { type: "application/javascript" });
+      const worker = new Worker(URL.createObjectURL(blob));
+      worker.onmessage = e => {
+        document.getElementById("eredmeny").innerText = "Eredmény: " + e.data;
+      };
+      worker.postMessage("");
+    }
+  </script>
+
+  <h2>Server-Sent Events (Szimulált)</h2>
+  <button onclick="indit()">Szimulált esemény</button>
+  <div id="adat"></div>
+
+  <script>
+    function indit() {
+      setInterval(() => {
+        const ido = new Date().toLocaleTimeString();
+        document.getElementById("adat").innerHTML += "Esemény: " + ido + "<br>";
+      }, 3000);
+    }
+  </script>
+
+  <h2>Geolocation API példa</h2>
+  <button onclick="getLocation()">Hely meghatározása</button>
+  <p id="helyzet"></p>
+
+  <script>
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+          document.getElementById("helyzet").innerText =
+            "Szélesség: " + position.coords.latitude + ", Hosszúság: " + position.coords.longitude;
+        }, () => {
+          document.getElementById("helyzet").innerText = "Nem sikerült lekérni a helyet.";
+        });
+      } else {
+        document.getElementById("helyzet").innerText = "A böngésző nem támogatja a Geolocation API-t.";
+      }
+    }
+  </script>
+
+  <h2>Drag and Drop – működő példa</h2>
+
+  <div id="elem" class="piros" draggable="true" ondragstart="drag(event)"></div>
+
+  <div id="cel" class="doboz" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+
+  <script>
+    function allowDrop(event) {
+      event.preventDefault();
+    }
+
+    function drag(event) {
+      event.dataTransfer.setData("text/plain", event.target.id);
+    }
+
+    function drop(event) {
+      event.preventDefault();
+      const data = event.dataTransfer.getData("text/plain");
+      const draggedElem = document.getElementById(data);
+      event.target.appendChild(draggedElem);
+    }
+  </script>
+
+<h2>Canvas példa</h2>
+<canvas id="rajz" width="200" height="100" style="border:1px solid black;"></canvas>
+
+<script>
+  const vaszon = document.getElementById("rajz");
+  const rajz = vaszon.getContext("2d");
+  rajz.fillStyle = "blue";
+  rajz.fillRect(20, 20, 160, 60);
+</script>
+
+<h2>SVG példa</h2>
+  <svg width="200" height="100">
+    <circle cx="50" cy="50" r="40" fill="orange" stroke="black" stroke-width="2" />
+    <text x="100" y="60" fill="black" font-size="16">SVG szöveg</text>
+  </svg>
+  
+  </div>
     </section>
     <footer>Készítő: Kelemen Ferenc Tamás <br>Neptun kód: OUVN70</footer>
 </body>

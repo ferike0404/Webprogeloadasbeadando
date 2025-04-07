@@ -84,3 +84,19 @@ button:hover {
     background-color: #ff3300;
     color: white;
 }
+
+.doboz {
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    border: 2px dashed #000;
+    display: inline-block;
+    vertical-align: top;
+  }
+
+.piros {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    cursor: grab;
+  }
