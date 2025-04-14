@@ -100,3 +100,92 @@ button:hover {
     background-color: red;
     cursor: grab;
   }
+
+#table {
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+
+#table th, #table td {
+    border: 1px solid #444;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+  }
+
+#table tr:hover {
+    background-color: #f0f0f0;
+  }
+
+#chart-container {
+    width: 80%;
+    max-width: 600px;
+    margin-top: 30px;
+  }
+
+.table-row {
+    cursor: pointer;
+  }
+
+.chart-line {
+    border-color: blue;
+    fill: false;
+  }
+
+#ajaxTable {
+    width: 80%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+
+#ajaxTable, #ajaxTable th, #ajaxTable td {
+    border: 1px solid black;
+    text-align: center;
+  }
+
+#ajaxTable th, #ajaxTable td {
+    padding: 10px;
+  }
+
+#formContainer {
+    margin-top: 20px;
+  }
+
+#formContainer input {
+    margin: 10px;
+    padding: 8px;
+    width: 200px;
+  }
+
+#responseMessage {
+    margin-top: 20px;
+    font-weight: bold;
+    color: #ff0000;
+  }
+
+#createButton, #updateButton, #deleteButton {
+    margin: 10px 0;
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+#createButton:hover, #updateButton:hover, #deleteButton:hover {
+    background-color: #45a049;
+  }
+
+#nameInput, #heightInput, #weightInput, #codeInput {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+  }
+
+#nameInput:focus, #heightInput:focus, #weightInput:focus, #codeInput:focus {
+    border-color: #4CAF50;
+  }
+
+#ajaxTable tr:hover {
+    background-color: #f5f5f5;
+  }

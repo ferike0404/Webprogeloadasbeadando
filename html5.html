@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>HTML5</title>
 </head>
 <body>
     <header>
@@ -44,11 +44,11 @@
   </script>
 
   <h2>Web Worker példa</h2>
-  <button onclick="indit()">Háttérszámítás</button>
+  <button onclick="inditWorker()">Háttérszámítás</button>
   <p id="eredmeny">Eredmény: -</p>
 
   <script>
-    function indit() {
+    function inditWorker() {
       const workerCode = `
         self.onmessage = function() {
           let osszeg = 0;
@@ -80,22 +80,40 @@
 
   <h2>Geolocation API példa</h2>
   <button onclick="getLocation()">Hely meghatározása</button>
-  <p id="helyzet"></p>
+<p id="helyzet"></p>
 
-  <script>
-    function getLocation() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(position => {
-          document.getElementById("helyzet").innerText =
-            "Szélesség: " + position.coords.latitude + ", Hosszúság: " + position.coords.longitude;
-        }, () => {
-          document.getElementById("helyzet").innerText = "Nem sikerült lekérni a helyet.";
-        });
-      } else {
-        document.getElementById("helyzet").innerText = "A böngésző nem támogatja a Geolocation API-t.";
-      }
+<script>
+  function getLocation() {
+    const helyElem = document.getElementById("helyzet");
+
+    if (!navigator.geolocation) {
+      helyElem.innerText = "A böngésző nem támogatja a Geolocation API-t.";
+      return;
     }
-  </script>
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        helyElem.innerText = `Szélesség: ${latitude}, Hosszúság: ${longitude}`;
+      },
+      (error) => {
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            helyElem.innerText = "A helymeghatározás nem engedélyezett.";
+            break;
+          case error.POSITION_UNAVAILABLE:
+            helyElem.innerText = "A helymeghatározás nem elérhető.";
+            break;
+          case error.TIMEOUT:
+            helyElem.innerText = "A helymeghatározás időtúllépés miatt megszakadt.";
+            break;
+          default:
+            helyElem.innerText = "Ismeretlen hiba történt.";
+        }
+      }
+    );
+  }
+</script>
 
   <h2>Drag and Drop – működő példa</h2>
 
@@ -135,7 +153,7 @@
     <circle cx="50" cy="50" r="40" fill="orange" stroke="black" stroke-width="2" />
     <text x="100" y="60" fill="black" font-size="16">SVG szöveg</text>
   </svg>
-  
+
   </div>
     </section>
     <footer>Készítő: Kelemen Ferenc Tamás <br>Neptun kód: OUVN70</footer>

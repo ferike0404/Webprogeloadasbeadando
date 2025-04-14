@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>Oojs</title>
 </head>
 <body>
     <header>
@@ -12,27 +12,53 @@
     </header>
     <nav>
         <ul>
-            <li><a href="index.html">Bevezető</a></li>
-            <li><a href="tablazat.html">Kezdőlap</a></li>
-            <li><a href="html5.html">Contact</a></li>
-            <li><a href="chartjs.html">Contact</a></li>
-            <li><a href="ajax.html">Contact</a></li>
-            <li><a href="oojs.html" class="active">Contact</a></li>
+            <li><a href="index.html">Kezdőlap</a></li>
+            <li><a href="tablazat.html">Táblázat</a></li>
+            <li><a href="html5.html">HTML5</a></li>
+            <li><a href="chartjs.html">Chartjs</a></li>
+            <li><a href="ajax.html">Ajax</a></li>
+            <li><a href="oojs.html" class="active">Oojs</a></li>
         </ul>
     </nav>
     <aside>
-        <h1>Bevezető</h1>
+        <h1>Oojs</h1>
     </aside>
     <section>
-        <h1>Bevezető oldal</h1>
-        <article>
-            <h2>Aenean nummy odio orci</h2>
-            <p>Phasellus wisi nulla...</p>
-        </article>
-        <article>
-            <h2>Aenean nummy odio orci</h2>
-            <p>Adipiscing elit praesent...</p>
-        </article>
+        <div>
+            <h1>Objektumorientált JavaScript alkalmazás</h1>
+
+    <script>
+        class Vehicle {
+            constructor(brand, model, year) {
+                this.brand = brand;
+                this.model = model;
+                this.year = year;
+            }
+
+            displayInfo() {
+                return `Jármű: ${this.brand} ${this.model}, Év: ${this.year}`;
+            }
+        }
+
+        class Car extends Vehicle {
+            constructor(brand, model, year, doors) {
+                super(brand, model, year);
+                this.doors = doors;
+            }
+
+            displayInfo() {
+                return `${super.displayInfo()}, Ajtók száma: ${this.doors}`;
+            }
+        }
+
+        const myCar = new Car('Toyota', 'Corolla', 2020, 4);
+
+        const carInfo = document.createElement('p');
+        carInfo.innerText = myCar.displayInfo();
+
+        document.body.appendChild(carInfo);
+    </script>
+        </div>
     </section>
     <footer>Készítő: Kelemen Ferenc Tamás <br>Neptun kód: OUVN70</footer>
 </body>
