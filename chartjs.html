@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>ChartJS</title>
 </head>
 <body>
     <header>
@@ -12,27 +13,80 @@
     </header>
     <nav>
         <ul>
-            <li><a href="index.html">Bevezető</a></li>
-            <li><a href="tablazat.html">Kezdőlap</a></li>
-            <li><a href="html5.html">Contact</a></li>
-            <li><a href="chartjs.html" class="active">Contact</a></li>
-            <li><a href="ajax.html">Contact</a></li>
-            <li><a href="oojs.html">Contact</a></li>
+            <li><a href="index.html">Kezdőlap</a></li>
+            <li><a href="tablazat.html">Táblázat</a></li>
+            <li><a href="html5.html">HTML5</a></li>
+            <li><a href="chartjs.html" class="active">Chartjs</a></li>
+            <li><a href="ajax.html">Ajax</a></li>
+            <li><a href="oojs.html">Oojs</a></li>
         </ul>
     </nav>
     <aside>
-        <h1>Bevezető</h1>
+        <h1>Chartjs</h1>
     </aside>
     <section>
-        <h1>Bevezető oldal</h1>
-        <article>
-            <h2>Aenean nummy odio orci</h2>
-            <p>Phasellus wisi nulla...</p>
-        </article>
-        <article>
-            <h2>Aenean nummy odio orci</h2>
-            <p>Adipiscing elit praesent...</p>
-        </article>
+        <div>
+            <h2>Táblázat és vonaldiagram</h2>
+
+            <table id="table">
+              <tbody>
+              </tbody>
+            </table>
+          
+            <div id="chart-container">
+              <canvas id="myChart"></canvas>
+            </div>
+          
+            <script>
+              const tabla = document.getElementById("table").querySelector("tbody");
+          
+              const matrix = Array.from({ length: 5 }, () =>
+                Array.from({ length: 5 }, () => Math.floor(Math.random() * 50 + 1))
+              );
+          
+              matrix.forEach((sor, index) => {
+                const tr = document.createElement("tr");
+                tr.classList.add("table-row");
+                sor.forEach(szam => {
+                  const td = document.createElement("td");
+                  td.textContent = szam;
+                  tr.appendChild(td);
+                });
+                tr.addEventListener("click", () => rajzolDiagramot(index));
+                tabla.appendChild(tr);
+              });
+          
+              const ctx = document.getElementById('myChart').getContext('2d');
+              let chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                  labels: ['1.', '2.', '3.', '4.', '5.'],
+                  datasets: [{
+                    label: 'Kiválasztott sor',
+                    data: [],
+                    borderColor: 'blue',
+                    fill: false,
+                    tension: 0.3
+                  }]
+                },
+                options: {
+                  responsive: true,
+                  scales: {
+                    y: {
+                      beginAtZero: true
+                    }
+                  }
+                }
+              });
+          
+              function rajzolDiagramot(sorIndex) {
+                const ertekek = matrix[sorIndex];
+                chart.data.datasets[0].data = ertekek;
+                chart.data.datasets[0].label = `Sor ${sorIndex + 1}`;
+                chart.update();
+              }
+            </script>
+        </div>
     </section>
     <footer>Készítő: Kelemen Ferenc Tamás <br>Neptun kód: OUVN70</footer>
 </body>
